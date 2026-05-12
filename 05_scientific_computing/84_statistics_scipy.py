@@ -53,7 +53,7 @@ try:
     print("\n=== 95% Confidence Interval for Mean ===")
     data = np.array(heights)
     ci = stats.t.interval(
-        confidence=0.95,            # 95% confidence level
+        0.95,                       # 95% confidence level (alpha param)
         df=len(data) - 1,           # degrees of freedom
         loc=np.mean(data),          # sample mean
         scale=stats.sem(data)       # standard error of the mean

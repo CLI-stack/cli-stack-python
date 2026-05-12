@@ -46,5 +46,7 @@ print(f"\n90 radians in degrees: {math.degrees(math.pi/2):.1f}°")
 
 print("\n=== Factorials and Combinations ===")
 print(f"5! (factorial): {math.factorial(5)}")    # 5! = 120
-print(f"C(10,3):        {math.comb(10, 3)}")     # combinations
-print(f"P(5,2):         {math.perm(5, 2)}")      # permutations
+comb_10_3 = math.factorial(10) // (math.factorial(3) * math.factorial(7))
+perm_5_2  = math.factorial(5) // math.factorial(3)
+print(f"C(10,3):        {comb_10_3}")     # combinations = 120
+print(f"P(5,2):         {perm_5_2}")      # permutations  = 20

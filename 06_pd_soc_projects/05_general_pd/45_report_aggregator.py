@@ -15,6 +15,15 @@ import os
 import argparse
 from datetime import datetime
 
+def _parse_dft(t):
+    m1 = re.search(r"Fault coverage\s*:\s*([\d.]+)%", t)
+    m2 = re.search(r"Pattern count\s*:\s*(\d+)", t)
+    return {
+        "sa_cov":   float(m1.group(1)) if m1 else None,
+        "patterns": int(m2.group(1))   if m2 else None,
+    }
+
+
 # Map of report filename patterns to extractors
 REPORT_PARSERS = {
     "lint": {
@@ -43,10 +52,7 @@ REPORT_PARSERS = {
     },
     "dft": {
         "pattern": ["dft.rpt", "atpg_coverage.rpt"],
-        "extract": lambda t: {
-            "sa_cov":    float(m.group(1)) if (m:=re.search(r"Fault coverage\s*:\s*([\d.]+)%", t)) else None,
-            "patterns":  int(m.group(1))   if (m:=re.search(r"Pattern count\s*:\s*(\d+)", t)) else None,
-        },
+        "extract": _parse_dft,
     },
     "upf": {
         "pattern": ["pa.rpt", "pa_violations.rpt"],
